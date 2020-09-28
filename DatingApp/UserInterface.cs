@@ -13,7 +13,11 @@ namespace DatingApp
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
 
             Console.SetCursorPosition(2, 10);
-            Console.Write("ny bruger? j/n: ");
+            Console.Write("Choose an option by typing in a number from the menu below: ");
+            Console.SetCursorPosition(2, 13);
+            Console.Write("1. Login");
+            Console.SetCursorPosition(2, 14);
+            Console.Write("2. Create new user");
         }
 
         public static void BuildCreateNewUser()
@@ -39,9 +43,9 @@ namespace DatingApp
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
 
             Console.SetCursorPosition(2, 10);
-            Console.Write("Username     :");
+            Console.Write("Username     : ");
             Console.SetCursorPosition(2, 11);
-            Console.Write("Password     :");
+            Console.Write("Password     : ");
 
         }
 
@@ -57,9 +61,9 @@ namespace DatingApp
             Console.WriteLine("Fields marked with a * are required");
 
             Console.SetCursorPosition(2, 14);
-            Console.WriteLine("* Gender (m/f)             :");
+            Console.WriteLine("* Gender (m/f)             : ");
             Console.SetCursorPosition(2, 15);
-            Console.WriteLine("* Interrested in (m/f/b)   :");
+            Console.WriteLine("* Interrested in (m/f/b)   : ");
 
         }
     }
