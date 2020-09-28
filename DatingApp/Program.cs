@@ -10,43 +10,50 @@ namespace DatingApp
         {
             string username, pass = string.Empty;
 
-            Console.WriteLine(FiggleFonts.Standard.Render("Dating App"));
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Please enter your username and password.");
-            Console.WriteLine("New user? type NEW followed by Enter");
-            Console.Write("Username: ");
+            UserInterface.BuildFrontpage();
+
             username = Console.ReadLine();
 
-            if(username.ToLower() == "new")
+            if(username.ToLower() == "j")
             {
-                User u = new User();
-                u = User.NewUser();
-                User.SaveUser(u);
 
-                Console.WriteLine($"{u.Firstname} {u.Lastname} {u.Username} {u.Email}");
+                UserInterface.BuildCreateNewUser();
+                User u = new User();
+
+                Console.SetCursorPosition(22, 10);
+                u.Username = Console.ReadLine();
+                Console.SetCursorPosition(22, 11);
+                u.Firstname = Console.ReadLine();
+                Console.SetCursorPosition(22, 12);
+                u.Lastname = Console.ReadLine();
+                Console.SetCursorPosition(22, 13);
+                u.Email = Console.ReadLine();
+                Console.SetCursorPosition(22, 14);
+                ConsoleKey key;
+                do
+                {
+                    var keyInfo = Console.ReadKey(intercept: true);
+                    key = keyInfo.Key;
+
+                    if (key == ConsoleKey.Backspace && pass.Length > 0)
+                    {
+                        Console.Write("\b \b");
+                        pass = pass[0..^1];
+                    }
+                    else if (!char.IsControl(keyInfo.KeyChar))
+                    {
+                        Console.Write("*");
+                        pass += keyInfo.KeyChar;
+                    }
+                } while (key != ConsoleKey.Enter);
+
+                u.Password = pass;
+
+                Console.SetCursorPosition(2, 17);
+                Console.WriteLine($"Test af output: {u.Firstname} {u.Lastname} {u.Username} {u.Email} {u.Password}");
                 Console.ReadKey();
                 
             }
-
-            Console.Write("password: ");
-            ConsoleKey key;
-            do
-            {
-                var keyInfo = Console.ReadKey(intercept: true);
-                key = keyInfo.Key;
-
-                if (key == ConsoleKey.Backspace && pass.Length > 0)
-                {
-                    Console.Write("\b \b");
-                    pass = pass[0..^1];
-                }
-                else if (!char.IsControl(keyInfo.KeyChar))
-                {
-                    Console.Write("*");
-                    pass += keyInfo.KeyChar;
-                }
-            } while (key != ConsoleKey.Enter);
 
 
         }

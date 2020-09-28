@@ -9,7 +9,7 @@ namespace DatingApp
         public string Lastname { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
-        private string Password { get; set; }
+        public string Password { get; set; }
         public User(string firstname, string lastname, string username, string email, string password)
         {
             Firstname = firstname;
