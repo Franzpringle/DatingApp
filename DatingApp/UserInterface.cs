@@ -29,6 +29,8 @@ namespace DatingApp
             Console.Write("Lastname        : ");
             Console.SetCursorPosition(2, 13);
             Console.Write("Email           : ");
+            Console.SetCursorPosition(2, 14);
+            Console.Write("Desired Password: ");
         }
 
         public static void BuildLoginPage()
