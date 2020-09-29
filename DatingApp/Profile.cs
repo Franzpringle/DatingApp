@@ -4,6 +4,7 @@ namespace DatingApp
 {
     public class Profile
     {
+        public string Username { get; set; }
         public string Gender { get; set; }
         public string InterrestedIn { get; set; }
         public int Height { get; set; }
@@ -13,11 +14,12 @@ namespace DatingApp
         public string About { get; set; }
         public bool IsActive { get; set; }
         private object User { get; set; }
+        public DateTime DateOfBirth { get; set; }
         
 
-        public Profile(object user, string gender, string interrestedIn, int height, string haircolor, string eyecolor, int age, string about)
+        public Profile(string username, string gender, string interrestedIn, int height, string haircolor, string eyecolor, int age, string about)
         {
-            User = user;
+            Username = username;
             Gender = gender;
             InterrestedIn = interrestedIn;
             Height = height;
@@ -37,28 +39,16 @@ namespace DatingApp
             Console.WriteLine("I saved the profile in the db..");
         }
 
-        public void SetInactive(string username)
+        public void SetInactive(Profile profile)
         {
-            if (IsActive == false)
-            {
-                Console.WriteLine("I have made the profile inactive in db..");
-            }
-            else
-            {
-                Console.WriteLine("profile is already inactive");
-            }
+            profile.IsActive = false;
+            SaveProfile(profile);
         }
 
-        public void SetActive(string username)
+        public void SetActive(Profile profile)
         {
-            if (IsActive == true)
-            {
-                Console.WriteLine("I have made the profile active in db..");
-            }
-            else
-            {
-                Console.WriteLine("profile is already active");
-            }
+            profile.IsActive = true;
+            SaveProfile(profile);
         }
     }
 }

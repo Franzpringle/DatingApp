@@ -52,6 +52,7 @@ namespace DatingApp
         public static void BuildCreateProfile()
         {
             Console.Clear();
+            Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
 
             Console.SetCursorPosition(2, 10);
             Console.WriteLine("Please fill in information about yourself");
@@ -61,9 +62,19 @@ namespace DatingApp
             Console.WriteLine("Fields marked with a * are required");
 
             Console.SetCursorPosition(2, 14);
-            Console.WriteLine("* Gender (m/f)             : ");
+            Console.WriteLine("* Gender (m/f)               : ");
             Console.SetCursorPosition(2, 15);
-            Console.WriteLine("* Interrested in (m/f/b)   : ");
+            Console.WriteLine("* Interrested in (m/f/b)     : ");
+            Console.SetCursorPosition(2, 16);
+            Console.WriteLine("  Height                     : ");
+            Console.SetCursorPosition(2, 17);
+            Console.WriteLine("  Eyecolor                   : ");
+            Console.SetCursorPosition(2, 18);
+            Console.WriteLine("  Haircolor                  : ");
+            Console.SetCursorPosition(2, 19);
+            Console.WriteLine("  Date of birth (dd-MM-yyyy) : ");
+            Console.SetCursorPosition(2, 20);
+            Console.WriteLine("* Something about yourself   : ");
 
         }
     }

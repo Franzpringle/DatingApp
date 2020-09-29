@@ -9,7 +9,10 @@ namespace DatingApp
         static void Main(string[] args)
         {
             string pass = string.Empty;
+            bool userIsNew = false;
             ConsoleKeyInfo menuChoice;
+            User u = new User();
+            Profile p = new Profile();
 
             do
             {
@@ -21,9 +24,7 @@ namespace DatingApp
 
             if (menuChoice.Key == ConsoleKey.NumPad2 || menuChoice.Key == ConsoleKey.D2)
             {
-
                 UserInterface.BuildCreateNewUser();
-                User u = new User();
 
                 Console.SetCursorPosition(22, 10);
                 u.Username = Console.ReadLine();
@@ -57,14 +58,17 @@ namespace DatingApp
                 Console.SetCursorPosition(2, 17);
                 Console.WriteLine($"Test af output: {u.Firstname} {u.Lastname} {u.Username} {u.Email} {u.Password}");
 
+                User.SaveUser(u);
+                userIsNew = true;
+
+
             }
             if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
             {
                 UserInterface.BuildLoginPage();
-                User loginUser = new User();
 
                 Console.SetCursorPosition(17, 10);
-                loginUser.Username = Console.ReadLine();
+                u.Username = Console.ReadLine();
                 Console.SetCursorPosition(17, 11);
                 ConsoleKey key;
                 do
@@ -84,14 +88,41 @@ namespace DatingApp
                     }
                 } while (key != ConsoleKey.Enter);
 
-                loginUser.Password = pass;
+                u.Password = pass;
 
+                User.LoginUser(u);
+                userIsNew = false;
+                
                 Console.SetCursorPosition(2, 13);
-                Console.WriteLine($"Testing output: {loginUser.Username} {loginUser.Password}");
+                Console.WriteLine($"Testing output: {u.Username} {u.Password}");
 
                 Console.ReadKey();
             }
 
+            if (userIsNew == true)
+            {
+                UserInterface.BuildCreateProfile();
+                p.Username = u.Username;
+
+                Console.SetCursorPosition(34, 14);
+                p.Gender = Console.ReadLine();
+                Console.SetCursorPosition(34, 15);
+                p.InterrestedIn = Console.ReadLine();
+                Console.SetCursorPosition(34, 16);
+                p.Height = Convert.ToInt16(Console.ReadLine());
+                Console.SetCursorPosition(34, 17);
+                p.Eyecolor = Console.ReadLine();
+                Console.SetCursorPosition(34, 18);
+                p.Haircolor = Console.ReadLine();
+                Console.SetCursorPosition(34, 19);
+                p.DateOfBirth = Convert.ToDateTime(Console.ReadLine());
+                Console.SetCursorPosition(34, 20);
+                p.About = Console.ReadLine();
+
+                p.IsActive = true;
+                p.SaveProfile(p);
+
+            }
 
         }
     }

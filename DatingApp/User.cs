@@ -68,12 +68,16 @@ namespace DatingApp
         {
             Console.WriteLine("I have saved the user to db..");
         }
-        
-        public object GetUser(string username)
+
+        public static object LoginUser(User user)
         {
             Console.WriteLine("I have returned to you with the desired user..");
 
-            User u = new User("firstname", "lastname", "username", "email", "pass");
+            User u = new User();
+            u.Username = user.Username;
+            u.Password = user.Password;
+
+            //repository kald hér for at hente user fra DB
             return u;
         }
     }
