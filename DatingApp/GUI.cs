@@ -73,9 +73,9 @@ namespace DatingApp
             Console.SetCursorPosition(2, 20);
             Console.WriteLine("  Haircolor                  : ");
             Console.SetCursorPosition(2, 21);
-            Console.WriteLine("*  Date of birth (dd-MM-yyyy): ");
+            Console.WriteLine("* Date of birth (dd-MM-yyyy) : ");
             Console.SetCursorPosition(2, 22);
-            Console.WriteLine("Something about yourself     : ");
+            Console.WriteLine("  Something about yourself   : ");
 
         }
 
@@ -91,8 +91,45 @@ namespace DatingApp
             Console.SetCursorPosition(2, 14);
             Console.WriteLine("2. Edit profile  :");
 
+            Console.SetCursorPosition(60, 10);
 
+        }
 
+        public static void BuildDatingProfile()
+        {
+            Console.Clear();
+
+            Console.SetCursorPosition(2, 14);
+            Console.WriteLine("Firstname             : ");
+            Console.SetCursorPosition(2, 15);
+            Console.WriteLine("Lastname              : ");
+            Console.SetCursorPosition(2, 16);
+            Console.WriteLine("Gender (m/f)          : ");
+            Console.SetCursorPosition(2, 17);
+            Console.WriteLine("Age                   : ");
+            Console.SetCursorPosition(2, 18);
+            Console.WriteLine("Height                : ");
+            Console.SetCursorPosition(2, 19);
+            Console.WriteLine("Eyecolor              : ");
+            Console.SetCursorPosition(2, 20);
+            Console.WriteLine("Haircolor             : ");
+            Console.SetCursorPosition(2, 21);
+            Console.WriteLine("Interrested in        : ");
+            Console.SetCursorPosition(2, 22);
+            Console.WriteLine("About                 : ");
+
+            Console.SetCursorPosition(2, 25);
+            Console.WriteLine("What do you choose? : ");
+            Console.SetCursorPosition(2, 27);
+            Console.WriteLine("1. Like and continue");
+            Console.SetCursorPosition(2, 28);
+            Console.WriteLine("2. Continue without liking");
+
+        }
+
+        public static void BuildMatchMenu()
+        {
+            //vi har et match! bruger kan skrive direkte til modpartens indbakke
         }
     }
 }

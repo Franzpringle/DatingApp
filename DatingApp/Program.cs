@@ -9,7 +9,7 @@ namespace DatingApp
         static void Main(string[] args)
         {
             ConsoleKeyInfo menuChoice;
-            //User u = new User();
+
 
             do
             {
@@ -18,6 +18,13 @@ namespace DatingApp
 
             } while (menuChoice.Key != ConsoleKey.NumPad1 && menuChoice.Key != ConsoleKey.D1 && menuChoice.Key != ConsoleKey.NumPad2 && menuChoice.Key != ConsoleKey.D2);
 
+            if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
+            {
+                GUI.BuildLoginPage();
+                UserRepository.GetUserByLogin();
+
+            }
+
             if (menuChoice.Key == ConsoleKey.NumPad2 || menuChoice.Key == ConsoleKey.D2)
             {
                 GUI.BuildCreateNewUser();
@@ -25,38 +32,36 @@ namespace DatingApp
                 UserRepository.SaveUser();
 
             }
-            if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
-            {
-                GUI.BuildLoginPage();
-                UserRepository.GetUser();
-
-            }
 
             if (UserRepository.userIsNew == true)
             {
                 GUI.BuildCreateProfile();
-                UserRepository.CreateNewUser();
-                UserRepository.SaveUser();
+                ProfileRepository.CreateNewProfile();
+                ProfileRepository.SaveProfile();
 
             }
-            //if (userIsNew == false)
-            //{
-            //    GUI.BuildUserMenu();
-            //    Console.SetCursorPosition(60, 10);
 
-            //    menuChoice = Console.ReadKey();
+            GUI.BuildUserMenu();
+            menuChoice = Console.ReadKey();
 
-            //    if(menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
-            //    {
-            //        // hent max 20 brugere
-            //        // cycle gennem dem
-            //        // user vælger 1 eller 2 for hhv. ja-tak eller nej-tak
+            if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
+            {
+                GUI.BuildDatingProfile();
+                ProfileRepository.GetProfile();
 
-            //    }
+            }
 
+            menuChoice = Console.ReadKey();
 
-            //}
-
+            if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
+            {
+                if (MatchRepository.CheckIfMatch() == true)
+                {
+                    GUI.BuildMatchMenu();
+                    MessageRepository.CreateNewMessage();
+                    MessageRepository.SendMessage();
+                }
+            }
         }
     }
 }

@@ -36,5 +36,31 @@ namespace DatingApp
             //gem bruger med SP her
             Console.Write($"{Profile.Firstname} {Profile.Lastname} has been saved..");
         }
+
+        public static void GetProfile()
+        {
+            //hent profil som bruger skal tage stilling til
+
+            Console.SetCursorPosition(26, 14);
+            Console.Write($"{Profile.Firstname}");
+            Console.SetCursorPosition(26, 15);
+            Console.Write($"{Profile.Lastname}");
+            Console.SetCursorPosition(26, 16);
+            Console.Write($"{Profile.Gender}");
+            Console.SetCursorPosition(26, 17);
+            Console.Write($"{Profile.Age}");
+            Console.SetCursorPosition(26, 18);
+            Console.Write($"{Profile.Height}");
+            Console.SetCursorPosition(26, 19);
+            Console.Write($"{Profile.Eyecolor}");
+            Console.SetCursorPosition(26, 20);
+            Console.Write($"{Profile.Haircolor}");
+            Console.SetCursorPosition(26, 21);
+            Console.Write($"{Profile.InterrestedIn}");
+            Console.SetCursorPosition(26, 22);
+            Console.Write($"{Profile.About}");
+
+            Console.SetCursorPosition(24, 25);
+        }
     }
 }
