@@ -5,7 +5,7 @@ using Figgle;
 
 namespace DatingApp
 {
-    public class UserInterface
+    public class GUI
     {
         public static void BuildFrontpage()
         {
@@ -13,11 +13,12 @@ namespace DatingApp
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
 
             Console.SetCursorPosition(2, 10);
-            Console.Write("Choose an option by typing in a number from the menu below: ");
+            Console.Write("Choose an option by typing a number from the menu below: ");
             Console.SetCursorPosition(2, 13);
             Console.Write("1. Login");
             Console.SetCursorPosition(2, 14);
             Console.Write("2. Create new user");
+            Console.SetCursorPosition(60, 10);
         }
 
         public static void BuildCreateNewUser()
@@ -28,12 +29,8 @@ namespace DatingApp
             Console.SetCursorPosition(2, 10);
             Console.Write("Desired username: ");
             Console.SetCursorPosition(2, 11);
-            Console.Write("Firstname       : ");
-            Console.SetCursorPosition(2, 12);
-            Console.Write("Lastname        : ");
-            Console.SetCursorPosition(2, 13);
             Console.Write("Email           : ");
-            Console.SetCursorPosition(2, 14);
+            Console.SetCursorPosition(2, 12);
             Console.Write("Desired Password: ");
         }
 
@@ -62,19 +59,39 @@ namespace DatingApp
             Console.WriteLine("Fields marked with a * are required");
 
             Console.SetCursorPosition(2, 14);
-            Console.WriteLine("* Gender (m/f)               : ");
+            Console.WriteLine("* Firstname                  : ");
             Console.SetCursorPosition(2, 15);
-            Console.WriteLine("* Interrested in (m/f/b)     : ");
+            Console.WriteLine("* Lastname                   : ");
             Console.SetCursorPosition(2, 16);
-            Console.WriteLine("  Height                     : ");
+            Console.WriteLine("* Gender (m/f)               : ");
             Console.SetCursorPosition(2, 17);
-            Console.WriteLine("  Eyecolor                   : ");
+            Console.WriteLine("* Interrested in (m/f/b)     : ");
             Console.SetCursorPosition(2, 18);
-            Console.WriteLine("  Haircolor                  : ");
+            Console.WriteLine("  Height                     : ");
             Console.SetCursorPosition(2, 19);
-            Console.WriteLine("  Date of birth (dd-MM-yyyy) : ");
+            Console.WriteLine("  Eyecolor                   : ");
             Console.SetCursorPosition(2, 20);
-            Console.WriteLine("* Something about yourself   : ");
+            Console.WriteLine("  Haircolor                  : ");
+            Console.SetCursorPosition(2, 21);
+            Console.WriteLine("*  Date of birth (dd-MM-yyyy): ");
+            Console.SetCursorPosition(2, 22);
+            Console.WriteLine("Something about yourself     : ");
+
+        }
+
+        public static void BuildUserMenu()
+        {
+            Console.Clear();
+            Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
+
+            Console.SetCursorPosition(2, 10);
+            Console.WriteLine("Choose an option by typing a number from the menu below: ");
+            Console.SetCursorPosition(2, 13);
+            Console.WriteLine("1. Start dating! :");
+            Console.SetCursorPosition(2, 14);
+            Console.WriteLine("2. Edit profile  :");
+
+
 
         }
     }
