@@ -14,12 +14,8 @@ namespace DatingApp
             Console.SetCursorPosition(22, 10);
             User.Username = Console.ReadLine();
             Console.SetCursorPosition(22, 11);
-            User.Firstname = Console.ReadLine();
-            Console.SetCursorPosition(22, 12);
-            User.Lastname = Console.ReadLine();
-            Console.SetCursorPosition(22, 13);
             User.Email = Console.ReadLine();
-            Console.SetCursorPosition(22, 14);
+            Console.SetCursorPosition(22, 12);
             ConsoleKey key;
             do
             {
@@ -40,7 +36,7 @@ namespace DatingApp
 
             User.Password = pass;
 
-            Console.SetCursorPosition(2, 17);
+            Console.SetCursorPosition(2, 15);
             Console.WriteLine($"Test af output: {User.Firstname} {User.Lastname} {User.Username} {User.Email} {User.Password}");
 
             userIsNew = true;
@@ -52,7 +48,7 @@ namespace DatingApp
             Console.ReadKey();
         }
 
-        public static void GetUser()
+        public static void GetUserByLogin()
         {
 
             Console.SetCursorPosition(17, 10);
