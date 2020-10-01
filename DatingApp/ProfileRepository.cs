@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DatingApp
 {
@@ -33,8 +35,35 @@ namespace DatingApp
 
         public static void SaveProfile()
         {
-            //gem bruger med SP her
-            Console.Write($"{Profile.Firstname} {Profile.Lastname} has been saved..");
+            using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
+            {
+                conn.Open();
+                string command = "createprofilebio";
+
+                SqlCommand cmd = new SqlCommand(command, conn);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@username", User.Username));
+                cmd.Parameters.Add(new SqlParameter("@firstname", Profile.Firstname));
+                cmd.Parameters.Add(new SqlParameter("@lastname", Profile.Lastname));
+                cmd.Parameters.Add(new SqlParameter("@gender", Profile.Gender));
+                cmd.Parameters.Add(new SqlParameter("@interrestedIn", Profile.InterrestedIn));
+                cmd.Parameters.Add(new SqlParameter("@height", Profile.Height));
+                cmd.Parameters.Add(new SqlParameter("@eyecolor", Profile.Eyecolor));
+                cmd.Parameters.Add(new SqlParameter("@haircolor", Profile.Haircolor));
+                cmd.Parameters.Add(new SqlParameter("@dateOfBirth", Profile.DateOfBirth));
+                cmd.Parameters.Add(new SqlParameter("@isActive", Profile.IsActive));
+                cmd.Parameters.Add(new SqlParameter("@about", Profile.About));
+
+                cmd.ExecuteNonQuery();
+
+
+                Console.Write($"{Profile.Firstname} {Profile.Lastname} has been saved..");
+                Console.ReadKey();
+
+                conn.Close();
+            }
         }
 
         public static void GetProfile()
