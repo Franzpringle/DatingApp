@@ -7,7 +7,7 @@ namespace DatingApp
 {
     public class GUI
     {
-        public static void BuildFrontpage()
+        public static void DisplayFrontpage()
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -21,7 +21,7 @@ namespace DatingApp
             Console.SetCursorPosition(60, 10);
         }
 
-        public static void BuildCreateNewUser()
+        public static void DisplayCreateNewUser()
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -34,7 +34,7 @@ namespace DatingApp
             Console.Write("Desired Password: ");
         }
 
-        public static void BuildLoginPage()
+        public static void DisplayLoginPage()
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -46,7 +46,7 @@ namespace DatingApp
 
         }
 
-        public static void BuildCreateProfile()
+        public static void DisplayCreateNewProfile()
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -79,7 +79,7 @@ namespace DatingApp
 
         }
 
-        public static void BuildUserMenu()
+        public static void DisplayUserMenu()
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -95,7 +95,7 @@ namespace DatingApp
 
         }
 
-        public static void BuildDatingProfile()
+        public static void DisplayDatingProfile()
         {
             Console.Clear();
 
@@ -127,9 +127,29 @@ namespace DatingApp
 
         }
 
-        public static void BuildMatchMenu()
+        public static void DisplayMatchMenu()
         {
             //vi har et match! bruger kan skrive direkte til modpartens indbakke
+        }
+
+        public static void DisplayEditProfile()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(2, 14);
+            Console.Write("Please choose an option from the menu below: ");
+            Console.SetCursorPosition(2, 16);
+            if (Profile.IsActive == true)
+            {
+                Console.Write("1. Change status to inactive");
+            }
+            else
+            {
+                Console.Write("1. Change status to active");
+            }
+            Console.SetCursorPosition(2, 17);
+            Console.WriteLine("2. Go back..");
+
+            Console.SetCursorPosition(48, 14);
         }
     }
 }

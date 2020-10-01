@@ -9,6 +9,9 @@ namespace DatingApp
     {
         public static string Subject { get; set; }
         public static string Body { get; set; }
+        public static string From { get; set; }
+        public static int To { get; set; }
+
 
     }
 }

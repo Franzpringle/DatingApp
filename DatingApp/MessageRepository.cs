@@ -8,6 +8,8 @@ namespace DatingApp
     {
         public static void CreateNewMessage()
         {
+            Message.From = User.Username;
+            Message.To = Profile.ProfileId;
             Message.Subject = Console.ReadLine();
             Message.Body = Console.ReadLine();
         }
