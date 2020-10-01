@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data.SqlClient;
+using System.Data;
+
 
 namespace DatingApp
 {
@@ -44,9 +47,30 @@ namespace DatingApp
 
         public static void SaveUser()
         {
-            Console.WriteLine($"user: {User.Username} has been saved..");
-            Console.ReadKey();
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
+            {
+                conn.Open();
+                string command = "NewUser";
+
+                SqlCommand cmd = new SqlCommand(command, conn);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@username", User.Username));
+                cmd.Parameters.Add(new SqlParameter("@Email", User.Email));
+                cmd.Parameters.Add(new SqlParameter("@pw", User.Password));
+
+                cmd.ExecuteNonQuery();
+
+                Console.WriteLine($"user: {User.Username} has been saved..");
+                Console.ReadKey();
+
+                conn.Close();
+            }
+
         }
+
 
         public static void GetUserByLogin()
         {
