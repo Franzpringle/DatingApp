@@ -62,5 +62,19 @@ namespace DatingApp
 
             Console.SetCursorPosition(24, 25);
         }
+
+        public static void SetActive()
+        {
+            Profile.IsActive = true;
+            Console.SetCursorPosition(2, 22);
+            Console.Write("You have changed the status of your profile..");
+        }
+
+        public static void SetInactive()
+        {
+            Profile.IsActive = false;
+            Console.SetCursorPosition(2, 22);
+            Console.Write("You have changed the status of your profile..");
+        }
     }
 }
