@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Figgle" Version="0.3.0" />
     <PackageReference Include="FIGlet-_-lib" Version="1.0.6" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
 </Project>

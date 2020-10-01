@@ -125,6 +125,8 @@ namespace DatingApp
             Console.SetCursorPosition(2, 28);
             Console.WriteLine("2. Continue without liking");
 
+            Console.SetCursorPosition(25, 25);
+
         }
 
         public static void DisplayMatchMenu()

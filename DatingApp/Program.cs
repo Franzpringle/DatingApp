@@ -43,12 +43,39 @@ namespace DatingApp
 
             GUI.DisplayUserMenu();
             menuChoice = Console.ReadKey();
-
-            if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
+            if (Profile.IsActive == true)
             {
-                GUI.DisplayDatingProfile();
-                ProfileRepository.GetProfile();
 
+                if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
+                {
+                    do
+                    {
+                        GUI.DisplayDatingProfile();
+                        ProfileRepository.GetProfile();
+                        menuChoice = Console.ReadKey();
+
+                        if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1) MatchRepository.RegisterLike();
+
+                        if (MatchRepository.CheckIfMatch() == true)
+                        {
+                            GUI.DisplayMatchMenu();
+                            MessageRepository.CreateNewMessage();
+                            MessageRepository.SendMessage();
+                        }
+
+                    } while (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1);
+
+                }
+            }
+            else
+            {
+                GUI.DisplayEditProfile();
+                menuChoice = Console.ReadKey();
+                if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
+                {
+                    if (Profile.IsActive == true) ProfileRepository.SetInactive();
+                    if (Profile.IsActive == false) ProfileRepository.SetActive();
+                }
             }
 
             if (menuChoice.Key == ConsoleKey.NumPad2 || menuChoice.Key == ConsoleKey.D2)
@@ -61,17 +88,6 @@ namespace DatingApp
                     if (Profile.IsActive == false) ProfileRepository.SetActive();
                 }
 
-            }
-            menuChoice = Console.ReadKey();
-
-            if (menuChoice.Key == ConsoleKey.NumPad1 || menuChoice.Key == ConsoleKey.D1)
-            {
-                if (MatchRepository.CheckIfMatch() == true)
-                {
-                    GUI.DisplayMatchMenu();
-                    MessageRepository.CreateNewMessage();
-                    MessageRepository.SendMessage();
-                }
             }
         }
     }
