@@ -5,11 +5,10 @@ namespace DatingApp
 {
     public class User
     {
-        public static string Firstname { get; set; }
-        public static string Lastname { get; set; }
-        public static string Username { get; set; }
-        public static string Email { get; set; }
-        public static string Password { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public bool IsLoggedIn { get; set; }
 
 
         //public static object LoginUser(User user)
