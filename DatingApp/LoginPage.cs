@@ -11,7 +11,7 @@ namespace DatingApp
         {
             GUI.DisplayLoginPage();
 
-            User currentUser = UserRepository.GetUserByLogin();
+            User currentUser = UserRepository.GetUserCredentials();
 
             if (currentUser.IsLoggedIn == true)
             {
@@ -25,7 +25,7 @@ namespace DatingApp
             else
             {
                 Console.WriteLine("Something went wrong..");
-                Console.WriteLine("Press any any key to return to the front page..");
+                Console.WriteLine("Press any key to return to the front page..");
                 Console.ReadKey();
             }
 

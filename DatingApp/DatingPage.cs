@@ -6,7 +6,7 @@ namespace DatingApp
 {
     class DatingPage
     {
-        public static void Run(Profile currentProfile)
+        public static void Run(Profile currentProfile, User currentUser)
         {
             while (true)
             {
@@ -22,11 +22,11 @@ namespace DatingApp
                 }
                 if (menuChoice == "2")
                 {
-                    Run(currentProfile);
+                    Run(currentProfile, currentUser);
                 }
                 if (menuChoice == "3")
                 {
-                    break;
+                    UserMenuPage.Run(currentProfile, currentUser);
                 }
             }
         }

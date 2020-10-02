@@ -13,12 +13,21 @@ namespace DatingApp
             GUI.DisplayCreateNewUser();
 
             User currentUser = UserRepository.CreateNewUser();
-            UserRepository.SaveUser(currentUser);
-            UserRepository.GetUserByLogin(currentUser);
+            if (UserRepository.UserAlreadyExists(currentUser) == true)
+            {
+                Console.WriteLine("Username or Email already exists. Please try again..");
+                Console.ReadKey();
+                Run();
+            }
+            else
+            {
+                UserRepository.SaveUser(currentUser);
+                UserRepository.GetUser(currentUser);
 
-            GUI.DisplayCreateNewProfile();
-            Profile currentProfile = ProfileRepository.CreateNewProfile();
-            ProfileRepository.SaveProfile(currentProfile, currentUser);
+                GUI.DisplayCreateNewProfile();
+                Profile currentProfile = ProfileRepository.CreateNewProfile();
+                ProfileRepository.SaveProfile(currentProfile, currentUser);
+            }
 
         }
     }
