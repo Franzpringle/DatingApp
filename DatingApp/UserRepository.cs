@@ -20,6 +20,7 @@ namespace DatingApp
             Console.SetCursorPosition(22, 11);
             u.Email = Console.ReadLine();
             Console.SetCursorPosition(22, 12);
+            // replaces any char with a * to avoid PW being visible in plain text in the console.
             ConsoleKey key;
             do
             {
@@ -43,33 +44,51 @@ namespace DatingApp
 
             return u;
         }
+        public static bool UserAlreadyExists(User u)
+        {
+            using SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString());
+            conn.Open();
+            string command = "CheckIfUserExists";
 
+            SqlCommand cmd = new SqlCommand(command, conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.Add(new SqlParameter("@username", u.Username));
+            cmd.Parameters.Add(new SqlParameter("@email", u.Email));
+
+            var result = cmd.ExecuteScalar();
+            int UserExist = Convert.ToInt32(result);
+
+            if (UserExist > 0) return true;
+            else return false;
+        }
         public static void SaveUser(User u)
         {
 
-            using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
+            using SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString());
+            conn.Open();
+            string command = "NewUser";
+
+            SqlCommand cmd = new SqlCommand(command, conn)
             {
-                conn.Open();
-                string command = "NewUser";
+                CommandType = CommandType.StoredProcedure
+            };
 
-                SqlCommand cmd = new SqlCommand(command, conn);
+            cmd.Parameters.Add(new SqlParameter("@username", u.Username));
+            cmd.Parameters.Add(new SqlParameter("@Email", u.Email));
+            cmd.Parameters.Add(new SqlParameter("@pw", u.Password));
 
-                cmd.CommandType = CommandType.StoredProcedure;
+            cmd.ExecuteNonQuery();
 
-                cmd.Parameters.Add(new SqlParameter("@username", u.Username));
-                cmd.Parameters.Add(new SqlParameter("@Email", u.Email));
-                cmd.Parameters.Add(new SqlParameter("@pw", u.Password));
-
-                cmd.ExecuteNonQuery();
-
-                Console.WriteLine($"user: {u.Username} has been saved..");
-                Console.ReadKey();
-
-                conn.Close();
-            }
+            Console.WriteLine($"user: {u.Username} has been saved..");
+            Console.ReadKey();
+            
+            conn.Close();
 
         }
-        public static User GetUserByLogin()
+        public static User GetUserCredentials()
         {
             User u = new User();
             Console.SetCursorPosition(17, 10);
@@ -94,11 +113,10 @@ namespace DatingApp
             } while (key != ConsoleKey.Enter);
 
             u.Password = pass;
-            u.IsLoggedIn = true;
 
             return u;
         }
-        public static User GetUserByLogin(User u)
+        public static User GetUser(User u)
         {
             // log user ind ved at tjekke om den findes i DB.
             u.IsLoggedIn = true;

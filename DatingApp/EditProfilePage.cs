@@ -19,7 +19,7 @@ namespace DatingApp
                     ProfileRepository.ChangeProfileStatus(currentProfile, currentUser);
                     break;
                 }
-                if (menuChoice == "2") break;
+                if (menuChoice == "2") UserMenuPage.Run(currentProfile, currentUser);
             }
         }
     }

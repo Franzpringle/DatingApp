@@ -89,9 +89,11 @@ namespace DatingApp
             Console.SetCursorPosition(2, 10);
             Console.WriteLine("Choose an option by typing a number from the menu below: ");
             Console.SetCursorPosition(2, 13);
-            Console.WriteLine("1. Start dating! :");
+            Console.WriteLine("1. Start dating");
             Console.SetCursorPosition(2, 14);
-            Console.WriteLine("2. Edit profile  :");
+            Console.WriteLine("2. Edit profile");
+            Console.SetCursorPosition(2, 16);
+            Console.WriteLine("3. Log out and return to frontpage");
 
             Console.SetCursorPosition(60, 10);
 
