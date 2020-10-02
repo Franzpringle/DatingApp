@@ -7,7 +7,7 @@ namespace DatingApp
 {
     public class GUI
     {
-        public static void DisplayFrontpage()
+        public static void DisplayFrontpage() //done
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -18,10 +18,12 @@ namespace DatingApp
             Console.Write("1. Login");
             Console.SetCursorPosition(2, 14);
             Console.Write("2. Create new user");
+            Console.SetCursorPosition(2, 15);
+            Console.Write("3. Exit program");
             Console.SetCursorPosition(60, 10);
         }
 
-        public static void DisplayCreateNewUser()
+        public static void DisplayCreateNewUser() //done
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -34,7 +36,7 @@ namespace DatingApp
             Console.Write("Desired Password: ");
         }
 
-        public static void DisplayLoginPage()
+        public static void DisplayLoginPage() //done
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -46,7 +48,7 @@ namespace DatingApp
 
         }
 
-        public static void DisplayCreateNewProfile()
+        public static void DisplayCreateNewProfile() //done
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -79,7 +81,7 @@ namespace DatingApp
 
         }
 
-        public static void DisplayUserMenu()
+        public static void DisplayUserMenu() //done
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
@@ -95,28 +97,28 @@ namespace DatingApp
 
         }
 
-        public static void DisplayDatingProfile()
+        public static void DisplayDatingProfile(Profile potentialMatch) //done
         {
             Console.Clear();
 
             Console.SetCursorPosition(2, 14);
-            Console.WriteLine("Firstname             : ");
+            Console.WriteLine($"Firstname             : {potentialMatch.Firstname}");
             Console.SetCursorPosition(2, 15);
-            Console.WriteLine("Lastname              : ");
+            Console.WriteLine($"Lastname              : {potentialMatch.Lastname}");
             Console.SetCursorPosition(2, 16);
-            Console.WriteLine("Gender (m/f)          : ");
+            Console.WriteLine($"Gender (m/f)          : {potentialMatch.Gender}");
             Console.SetCursorPosition(2, 17);
-            Console.WriteLine("Age                   : ");
+            Console.WriteLine($"Age                   : {potentialMatch.Age}");
             Console.SetCursorPosition(2, 18);
-            Console.WriteLine("Height                : ");
+            Console.WriteLine($"Height                : {potentialMatch.Height}");
             Console.SetCursorPosition(2, 19);
-            Console.WriteLine("Eyecolor              : ");
+            Console.WriteLine($"Eyecolor              : {potentialMatch.Eyecolor}");
             Console.SetCursorPosition(2, 20);
-            Console.WriteLine("Haircolor             : ");
+            Console.WriteLine($"Haircolor             : {potentialMatch.Haircolor}");
             Console.SetCursorPosition(2, 21);
-            Console.WriteLine("Interrested in        : ");
+            Console.WriteLine($"Interrested in        : {potentialMatch.InterestedIn}");
             Console.SetCursorPosition(2, 22);
-            Console.WriteLine("About                 : ");
+            Console.WriteLine($"About                 : {potentialMatch.About}");
 
             Console.SetCursorPosition(2, 25);
             Console.WriteLine("What do you choose? : ");
@@ -124,23 +126,25 @@ namespace DatingApp
             Console.WriteLine("1. Like and continue");
             Console.SetCursorPosition(2, 28);
             Console.WriteLine("2. Continue without liking");
+            Console.SetCursorPosition(2, 29);
+            Console.WriteLine("3. Exit..");
 
             Console.SetCursorPosition(25, 25);
 
         }
 
-        public static void DisplayMatchMenu()
+        public static void DisplayMatchMenu(Profile currentProfile, Profile matchProfile)
         {
             //vi har et match! bruger kan skrive direkte til modpartens indbakke
         }
 
-        public static void DisplayEditProfile()
+        public static void DisplayEditProfile(Profile p) //done
         {
             Console.Clear();
             Console.SetCursorPosition(2, 14);
             Console.Write("Please choose an option from the menu below: ");
             Console.SetCursorPosition(2, 16);
-            if (Profile.IsActive == true)
+            if (p.IsActive == true)
             {
                 Console.Write("1. Change status to inactive");
             }

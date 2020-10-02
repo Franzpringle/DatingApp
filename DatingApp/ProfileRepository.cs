@@ -8,32 +8,35 @@ namespace DatingApp
 {
     class ProfileRepository
     {
-        public static void CreateNewProfile()
+        public static Profile CreateNewProfile()
         {
+            Profile p = new Profile();
 
             Console.SetCursorPosition(34, 14);
-            Profile.Firstname = Console.ReadLine();
+            p.Firstname = Console.ReadLine();
             Console.SetCursorPosition(34, 15);
-            Profile.Lastname = Console.ReadLine();
+            p.Lastname = Console.ReadLine();
             Console.SetCursorPosition(34, 16);
-            Profile.Gender = Console.ReadLine();
+            p.Gender = Console.ReadLine();
             Console.SetCursorPosition(34, 17);
-            Profile.InterrestedIn = Console.ReadLine();
+            p.InterestedIn = Console.ReadLine();
             Console.SetCursorPosition(34, 18);
-            Profile.Height = Convert.ToInt16(Console.ReadLine());
+            p.Height = Convert.ToInt16(Console.ReadLine());
             Console.SetCursorPosition(34, 19);
-            Profile.Eyecolor = Console.ReadLine();
+            p.Eyecolor = Console.ReadLine();
             Console.SetCursorPosition(34, 20);
-            Profile.Haircolor = Console.ReadLine();
+            p.Haircolor = Console.ReadLine();
             Console.SetCursorPosition(34, 21);
-            Profile.DateOfBirth = Convert.ToDateTime(Console.ReadLine());
+            p.DateOfBirth = Convert.ToDateTime(Console.ReadLine());
             Console.SetCursorPosition(34, 22);
-            Profile.About = Console.ReadLine();
+            p.About = Console.ReadLine();
 
-            Profile.IsActive = true;
+            p.IsActive = true;
+
+            return p;
         }
 
-        public static void SaveProfile()
+        public static void SaveProfile(Profile p, User u)
         {
             using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
             {
@@ -44,64 +47,67 @@ namespace DatingApp
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add(new SqlParameter("@username", User.Username));
-                cmd.Parameters.Add(new SqlParameter("@firstname", Profile.Firstname));
-                cmd.Parameters.Add(new SqlParameter("@lastname", Profile.Lastname));
-                cmd.Parameters.Add(new SqlParameter("@gender", Profile.Gender));
-                cmd.Parameters.Add(new SqlParameter("@interrestedIn", Profile.InterrestedIn));
-                cmd.Parameters.Add(new SqlParameter("@height", Profile.Height));
-                cmd.Parameters.Add(new SqlParameter("@eyecolor", Profile.Eyecolor));
-                cmd.Parameters.Add(new SqlParameter("@haircolor", Profile.Haircolor));
-                cmd.Parameters.Add(new SqlParameter("@dateOfBirth", Profile.DateOfBirth));
-                cmd.Parameters.Add(new SqlParameter("@isActive", Profile.IsActive));
-                cmd.Parameters.Add(new SqlParameter("@about", Profile.About));
+                cmd.Parameters.Add(new SqlParameter("@username", u.Username));
+                cmd.Parameters.Add(new SqlParameter("@firstname", p.Firstname));
+                cmd.Parameters.Add(new SqlParameter("@lastname", p.Lastname));
+                cmd.Parameters.Add(new SqlParameter("@gender", p.Gender));
+                cmd.Parameters.Add(new SqlParameter("@interestedIn", p.InterestedIn));
+                cmd.Parameters.Add(new SqlParameter("@height", p.Height));
+                cmd.Parameters.Add(new SqlParameter("@eyecolor", p.Eyecolor));
+                cmd.Parameters.Add(new SqlParameter("@haircolor", p.Haircolor));
+                cmd.Parameters.Add(new SqlParameter("@dateOfBirth", p.DateOfBirth));
+                cmd.Parameters.Add(new SqlParameter("@isActive", p.IsActive));
+                cmd.Parameters.Add(new SqlParameter("@about", p.About));
 
                 cmd.ExecuteNonQuery();
 
 
-                Console.Write($"{Profile.Firstname} {Profile.Lastname} has been saved..");
+                Console.Write($"> {p.Firstname} {p.Lastname} has been saved..");
                 Console.ReadKey();
 
                 conn.Close();
             }
         }
 
-        public static void GetProfile()
+        public static Profile GetUserProfile(User u)
         {
-            //hent profil som bruger skal tage stilling til
+            Profile p = new Profile();
 
-            Console.SetCursorPosition(26, 14);
-            Console.Write($"{Profile.Firstname}");
-            Console.SetCursorPosition(26, 15);
-            Console.Write($"{Profile.Lastname}");
-            Console.SetCursorPosition(26, 16);
-            Console.Write($"{Profile.Gender}");
-            Console.SetCursorPosition(26, 17);
-            Console.Write($"{Profile.Age}");
-            Console.SetCursorPosition(26, 18);
-            Console.Write($"{Profile.Height}");
-            Console.SetCursorPosition(26, 19);
-            Console.Write($"{Profile.Eyecolor}");
-            Console.SetCursorPosition(26, 20);
-            Console.Write($"{Profile.Haircolor}");
-            Console.SetCursorPosition(26, 21);
-            Console.Write($"{Profile.InterrestedIn}");
-            Console.SetCursorPosition(26, 22);
-            Console.Write($"{Profile.About}");
+            // kald til DB her så vi kan finde users profile
 
-            Console.SetCursorPosition(24, 25);
+            return p;
+        }
+        public static Profile GetPotentialMatchProfile()
+        {
+            Profile potentialMatch = new Profile();
+            //hent profil som bruger skal tage stilling til og sæt den = potentialMatch
+
+            return potentialMatch;
         }
 
-        public static void SetActive()
+        public static void ChangeProfileStatus(Profile p, User u)
         {
-            Profile.IsActive = true;
-            Console.SetCursorPosition(2, 22);
-            Console.Write("You have changed the status of your profile..");
-        }
 
-        public static void SetInactive()
-        {
-            Profile.IsActive = false;
+            if (p.IsActive == true) p.IsActive = false;
+            if (p.IsActive == false) p.IsActive = true;
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
+            {
+                conn.Open();
+                string command = "ChangeStatus";
+
+                SqlCommand cmd = new SqlCommand(command, conn);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@username", u.Username));
+                cmd.Parameters.Add(new SqlParameter("@isActive", p.IsActive));
+
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+            }
+
             Console.SetCursorPosition(2, 22);
             Console.Write("You have changed the status of your profile..");
         }

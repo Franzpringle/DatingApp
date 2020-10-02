@@ -12,12 +12,13 @@ namespace DatingApp
         public static bool userIsNew { get; set; }
         public static string pass { get; set; }
 
-        public static void CreateNewUser()
+        public static User CreateNewUser()
         {
+            User u = new User();
             Console.SetCursorPosition(22, 10);
-            User.Username = Console.ReadLine();
+            u.Username = Console.ReadLine();
             Console.SetCursorPosition(22, 11);
-            User.Email = Console.ReadLine();
+            u.Email = Console.ReadLine();
             Console.SetCursorPosition(22, 12);
             ConsoleKey key;
             do
@@ -37,15 +38,13 @@ namespace DatingApp
                 }
             } while (key != ConsoleKey.Enter);
 
-            User.Password = pass;
-
-            Console.SetCursorPosition(2, 15);
-            Console.WriteLine($"Test af output: {User.Firstname} {User.Lastname} {User.Username} {User.Email} {User.Password}");
-
+            u.Password = pass;
             userIsNew = true;
+
+            return u;
         }
 
-        public static void SaveUser()
+        public static void SaveUser(User u)
         {
 
             using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
@@ -57,26 +56,24 @@ namespace DatingApp
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add(new SqlParameter("@username", User.Username));
-                cmd.Parameters.Add(new SqlParameter("@Email", User.Email));
-                cmd.Parameters.Add(new SqlParameter("@pw", User.Password));
+                cmd.Parameters.Add(new SqlParameter("@username", u.Username));
+                cmd.Parameters.Add(new SqlParameter("@Email", u.Email));
+                cmd.Parameters.Add(new SqlParameter("@pw", u.Password));
 
                 cmd.ExecuteNonQuery();
 
-                Console.WriteLine($"user: {User.Username} has been saved..");
+                Console.WriteLine($"user: {u.Username} has been saved..");
                 Console.ReadKey();
 
                 conn.Close();
             }
 
         }
-
-
-        public static void GetUserByLogin()
+        public static User GetUserByLogin()
         {
-
+            User u = new User();
             Console.SetCursorPosition(17, 10);
-            User.Username = Console.ReadLine();
+            u.Username = Console.ReadLine();
             Console.SetCursorPosition(17, 11);
             ConsoleKey key;
             do
@@ -96,13 +93,17 @@ namespace DatingApp
                 }
             } while (key != ConsoleKey.Enter);
 
-            User.Password = pass;
-            userIsNew = false;
+            u.Password = pass;
+            u.IsLoggedIn = true;
 
-            Console.SetCursorPosition(2, 13);
-            Console.WriteLine($"Testing output: {User.Username} {User.Password}");
-
-            Console.ReadKey();
+            return u;
         }
+        public static User GetUserByLogin(User u)
+        {
+            // log user ind ved at tjekke om den findes i DB.
+            u.IsLoggedIn = true;
+            return u;
+        }
+        
     }
 }

@@ -4,18 +4,18 @@ namespace DatingApp
 {
     public class Profile
     {   
-        public static int ProfileId { get; private set; }
-        public static string Firstname { get; set; }
-        public static string Lastname { get; set; }
-        public static string Gender { get; set; }
-        public static string InterrestedIn { get; set; }
-        public static int Height { get; set; }
-        public static string Haircolor { get; set; }
-        public static string Eyecolor { get; set; }
-        public static int Age { get; set; }
-        public static string About { get; set; }
-        public static bool IsActive { get; set; }
-        public static DateTime DateOfBirth { get; set; }
+        public int ProfileId { get; private set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Gender { get; set; }
+        public string InterestedIn { get; set; }
+        public int Height { get; set; }
+        public string Haircolor { get; set; }
+        public string Eyecolor { get; set; }
+        public int Age { get; set; }
+        public string About { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
     }
 }
