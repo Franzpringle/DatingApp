@@ -4,7 +4,7 @@ namespace DatingApp
 {
     public class Profile
     {   
-        public int ProfileId { get; private set; }
+        public int ProfileId { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Gender { get; set; }
