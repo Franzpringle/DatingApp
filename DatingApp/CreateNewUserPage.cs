@@ -10,11 +10,13 @@ namespace DatingApp
 
         public static void Run()
         {
+            
             GUI.DisplayCreateNewUser();
-
             User currentUser = UserRepository.CreateNewUser();
+
             if (UserRepository.UserAlreadyExists(currentUser) == true)
             {
+                Console.SetCursorPosition(2, 15);
                 Console.WriteLine("Username or Email already exists. Please try again..");
                 Console.ReadKey();
                 Run();
@@ -22,7 +24,6 @@ namespace DatingApp
             else
             {
                 UserRepository.SaveUser(currentUser);
-                UserRepository.GetUser(currentUser);
 
                 GUI.DisplayCreateNewProfile();
                 Profile currentProfile = ProfileRepository.CreateNewProfile();

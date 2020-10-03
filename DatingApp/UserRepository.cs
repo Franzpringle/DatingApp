@@ -10,11 +10,12 @@ namespace DatingApp
     class UserRepository
     {
         public static bool userIsNew { get; set; }
-        public static string pass { get; set; }
 
         public static User CreateNewUser()
         {
+            string pass = string.Empty;
             User u = new User();
+
             Console.SetCursorPosition(22, 10);
             u.Username = Console.ReadLine();
             Console.SetCursorPosition(22, 11);
@@ -82,6 +83,7 @@ namespace DatingApp
 
             cmd.ExecuteNonQuery();
 
+            Console.SetCursorPosition(2, 15);
             Console.WriteLine($"user: {u.Username} has been saved..");
             Console.ReadKey();
             
@@ -90,10 +92,13 @@ namespace DatingApp
         }
         public static User GetUserCredentials()
         {
+            string pass = string.Empty;
+
             User u = new User();
             Console.SetCursorPosition(17, 10);
             u.Username = Console.ReadLine();
             Console.SetCursorPosition(17, 11);
+            // replaces any char with a * to avoid PW being visible in plain text in the console.
             ConsoleKey key;
             do
             {
@@ -116,11 +121,25 @@ namespace DatingApp
 
             return u;
         }
-        public static User GetUser(User u)
+        public static bool UserLoginSuccess(User u)
         {
-            // log user ind ved at tjekke om den findes i DB.
-            u.IsLoggedIn = true;
-            return u;
+            using SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString());
+            conn.Open();
+            string command = "LoginUser";
+
+            SqlCommand cmd = new SqlCommand(command, conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.Add(new SqlParameter("@username", u.Username));
+            cmd.Parameters.Add(new SqlParameter("@pw", u.Password));
+
+            var result = cmd.ExecuteScalar();
+            int userCanBeLoggedIn = Convert.ToInt32(result);
+
+            if (userCanBeLoggedIn > 0) return true;
+            else return false;
         }
         
     }
