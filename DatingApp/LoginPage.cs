@@ -13,18 +13,20 @@ namespace DatingApp
 
             User currentUser = UserRepository.GetUserCredentials();
 
-            if (currentUser.IsLoggedIn == true)
+            if (UserRepository.UserLoginSuccess(currentUser) == true)
             {
                 Profile currentProfile = ProfileRepository.GetUserProfile(currentUser);
                 UserMenuPage.Run(currentProfile, currentUser);
             }
-            else if (currentUser.IsLoggedIn == false)
+            else if (UserRepository.UserLoginSuccess(currentUser) == false)
             {
                 Run();
             }
             else
             {
+                Console.SetCursorPosition(2, 15);
                 Console.WriteLine("Something went wrong..");
+                Console.SetCursorPosition(2, 16);
                 Console.WriteLine("Press any key to return to the front page..");
                 Console.ReadKey();
             }
