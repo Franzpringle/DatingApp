@@ -10,13 +10,13 @@ namespace DatingApp
         {
             while (true)
             {
-                Profile potentialMatch = ProfileRepository.GetPotentialMatchProfile();
+                Profile potentialMatch = ProfileRepository.GetPotentialMatchProfile(currentUser);
                 GUI.DisplayDatingProfile(potentialMatch);
 
                 string menuChoice = Console.ReadLine().ToLower();
                 if (menuChoice == "1")
                 {
-                    MatchRepository.RegisterLike(currentProfile, potentialMatch);
+                    MatchRepository.RegisterLike(currentUser, potentialMatch);
                     bool isMatch = MatchRepository.CheckIfMatch(currentProfile, potentialMatch);
                     if (isMatch == true) GUI.DisplayMatchMenu(currentProfile, potentialMatch);
                 }

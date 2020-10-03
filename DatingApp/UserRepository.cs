@@ -133,7 +133,7 @@ namespace DatingApp
             };
 
             cmd.Parameters.Add(new SqlParameter("@username", u.Username));
-            cmd.Parameters.Add(new SqlParameter("@pw", u.Password));
+            cmd.Parameters.Add(new SqlParameter("@password", u.Password));
 
             var result = cmd.ExecuteScalar();
             int userCanBeLoggedIn = Convert.ToInt32(result);
