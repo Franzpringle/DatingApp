@@ -26,7 +26,7 @@ namespace DatingApp
         //    //hent message fra DB
         //}
 
-        public static void AnyNewMessages(User currentUser)
+        public static bool AnyNewMessages(string username)
         {
 
             using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
@@ -37,18 +37,18 @@ namespace DatingApp
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add(new SqlParameter("@Username", currentUser.Username));
+                cmd.Parameters.Add(new SqlParameter("@Username", username));
 
                 conn.Open();
-                var NewMessages = cmd.ExecuteScalar();
+                int NewMessages = (int)cmd.ExecuteScalar();
                 conn.Close();
 
-                //something like
-                // if(NewMessages > 0)
+                if (NewMessages > 0)
                 {
-                   //Notification on screen
+                    return true;
                 }
 
+                return false;
             }
         }
     }
