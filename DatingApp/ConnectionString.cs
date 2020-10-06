@@ -12,8 +12,8 @@ namespace DatingApp
 
         static public string GetConnectionString()
         {
-            //return @"Data Source=LAPTOP-BFH2E4BH\H2PROJECT;Initial Catalog=DatingApp;Integrated Security=True";
-            return @"Data Source=DESKTOP-2V887A2;Initial Catalog=DatingApp;Integrated Security=True";
+            return @"Data Source=LAPTOP-BFH2E4BH\H2PROJECT;Initial Catalog=DatingApp;Integrated Security=True";
+            //return @"Data Source=DESKTOP-2V887A2;Initial Catalog=DatingApp;Integrated Security=True";
         }
     }
 }

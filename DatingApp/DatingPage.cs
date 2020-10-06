@@ -18,7 +18,10 @@ namespace DatingApp
                 {
                     MatchRepository.RegisterLike(currentUser, potentialMatch);
                     bool isMatch = MatchRepository.CheckIfMatch(currentProfile, potentialMatch);
-                    if (isMatch == true) GUI.DisplayMatchMenu(currentProfile, potentialMatch);
+                    if (isMatch == true)
+                    {
+                        MatchesPage.Run(currentProfile, currentUser, potentialMatch);
+                    }
                 }
                 if (menuChoice == "2")
                 {
@@ -28,6 +31,7 @@ namespace DatingApp
                 {
                     UserMenuPage.Run(currentProfile, currentUser);
                 }
+
             }
         }
     }

@@ -20,6 +20,7 @@ namespace DatingApp
                     break;
                 }
                 if (menuChoice == "2") UserMenuPage.Run(currentProfile, currentUser);
+
             }
         }
     }

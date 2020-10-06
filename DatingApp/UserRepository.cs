@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
-
+using System.Text.RegularExpressions;
 
 namespace DatingApp
 {
@@ -18,8 +18,32 @@ namespace DatingApp
 
             Console.SetCursorPosition(22, 10);
             u.Username = Console.ReadLine();
+            do
+            {
+                Console.SetCursorPosition(45, 20);
+                Console.WriteLine("Wrong input.");
+                Console.SetCursorPosition(45, 21);
+                Console.WriteLine("Please try again.");
+                Console.ReadKey();
+                Console.Clear();
+                GUI.DisplayCreateNewUser();
+                CreateNewUser();
+
+            }while(Regex.IsMatch(u.Username, @"^[a-zA-Z0-9_]+$"));
+
             Console.SetCursorPosition(22, 11);
             u.Email = Console.ReadLine();
+            do
+            {
+                Console.SetCursorPosition(45, 20);
+                Console.WriteLine("Wrong input.");
+                Console.SetCursorPosition(45, 21);
+                Console.WriteLine("Please try again.");
+                Console.ReadKey();
+                CreateNewUser();
+
+            } while (!Regex.IsMatch(u.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"));
+
             Console.SetCursorPosition(22, 12);
             // replaces any char with a * to avoid PW being visible in plain text in the console.
             ConsoleKey key;
@@ -61,6 +85,7 @@ namespace DatingApp
 
             var result = cmd.ExecuteScalar();
             int UserExist = Convert.ToInt32(result);
+            conn.Close();
 
             if (UserExist > 0) return true;
             else return false;
@@ -137,6 +162,7 @@ namespace DatingApp
 
             var result = cmd.ExecuteScalar();
             int userCanBeLoggedIn = Convert.ToInt32(result);
+            conn.Close();
 
             if (userCanBeLoggedIn > 0) return true;
             else return false;
