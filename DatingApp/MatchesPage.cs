@@ -11,10 +11,11 @@ namespace DatingApp
 
             while (true)
             {
-                GUI.DisplayMatchMenu(currentProfile, potentialMatch); 
+
+                GUI.DisplayMatchMenu(); 
                 string menuChoice = Console.ReadLine().ToLower();
 
-                if (menuChoice == "1") MessageInboxPage.Run(currentProfile);
+                if (menuChoice == "1") MessageInboxPage.Run(currentProfile, potentialMatch);
                 if (menuChoice == "2") DatingPage.Run(currentProfile, currentUser);
 
             }

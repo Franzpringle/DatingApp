@@ -73,10 +73,37 @@ namespace DatingApp
         {
             Profile p = new Profile();
 
-            // kald til DB her så vi kan finde users profile
+            using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
+            {
+                conn.Open();
 
+                string command = "GetUserProfile";
+                SqlCommand cmd = new SqlCommand(command, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@Username", u.Username));
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    p.Firstname = (string)reader.GetValue("firstname");
+                    p.Lastname = (string)reader.GetValue("lastname");
+                    p.Gender = (string)reader.GetValue("gender");
+                    p.InterestedIn = (string)reader.GetValue("interestedIn");
+                    p.Height = (int)reader.GetValue("height");
+                    p.Eyecolor = (string)reader.GetValue("eyecolor");
+                    p.Haircolor = (string)reader.GetValue("haircolor");
+                    p.DateOfBirth = (DateTime)reader.GetValue("dateOfBirth");
+                    p.About = (string)reader.GetValue("about");
+                    p.ProfileId = (int)reader.GetValue("ID");
+                }
+
+            }
             return p;
         }
+
+
         public static Profile GetPotentialMatchProfile(User currentUser)
         {
             Profile potentialMatch = new Profile();
@@ -92,19 +119,29 @@ namespace DatingApp
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    potentialMatch.Firstname = (string)reader.GetValue("firstname");
-                    potentialMatch.Lastname = (string)reader.GetValue("lastname");
-                    potentialMatch.Gender = (string)reader.GetValue("gender");
-                    potentialMatch.InterestedIn = (string)reader.GetValue("interestedIn");
-                    potentialMatch.Height = (int)reader.GetValue("height");
-                    potentialMatch.Eyecolor = (string)reader.GetValue("eyecolor");
-                    potentialMatch.Haircolor = (string)reader.GetValue("haircolor");
-                    potentialMatch.Age = (int)reader.GetValue("age");
-                    potentialMatch.About = (string)reader.GetValue("about");
-                    potentialMatch.ProfileId = (int)reader.GetValue("ID");
+                    while (reader.Read())
+                    {
+                        potentialMatch.Firstname = (string)reader.GetValue("firstname");
+                        potentialMatch.Lastname = (string)reader.GetValue("lastname");
+                        potentialMatch.Gender = (string)reader.GetValue("gender");
+                        potentialMatch.InterestedIn = (string)reader.GetValue("interestedIn");
+                        potentialMatch.Height = (int)reader.GetValue("height");
+                        potentialMatch.Eyecolor = (string)reader.GetValue("eyecolor");
+                        potentialMatch.Haircolor = (string)reader.GetValue("haircolor");
+                        potentialMatch.Age = (int)reader.GetValue("age");
+                        potentialMatch.About = (string)reader.GetValue("about");
+                        potentialMatch.ProfileId = (int)reader.GetValue("ID");
+                    }
                 }
+                else
+                {
+                    Console.SetCursorPosition(15, 14);
+                    Console.WriteLine("No matches found");
+                    Console.WriteLine("Try again later.");
+                }
+
             }
 
             return potentialMatch;
