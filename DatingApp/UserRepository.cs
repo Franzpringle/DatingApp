@@ -42,7 +42,7 @@ namespace DatingApp
                 Console.ReadKey();
                 CreateNewUser();
 
-            } while (!Regex.IsMatch(u.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"));
+            } while (Regex.IsMatch(u.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"));
 
             Console.SetCursorPosition(22, 12);
             // replaces any char with a * to avoid PW being visible in plain text in the console.

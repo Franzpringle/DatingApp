@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using Figgle;
 
 namespace DatingApp
@@ -85,7 +86,7 @@ namespace DatingApp
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
-            
+
             Console.SetCursorPosition(2, 10);
             Console.WriteLine("Choose an option by typing a number from the menu below: ");
             Console.SetCursorPosition(2, 13);
@@ -95,20 +96,26 @@ namespace DatingApp
             Console.SetCursorPosition(2, 16);
             Console.WriteLine("3. Log out and return to frontpage");
 
-            //if(MessageRepository.AnyNewMessages() = true)
+            Console.SetCursorPosition(60, 10);
+
+        }
+
+        public static void DisplayNewMessageIcon()
+        {
+            //if (MessageRepository.AnyNewMessages() = true)
             //{
             //    Console.SetCursorPosition(2, 20);
             //    Console.WriteLine("4. New messages");
             //}
+        }
 
-            //if(MatchRepository.CheckIfMatch() = true)
+        public static void DisplayNewMatchIcon()
+        {
+            //if (MatchRepository.CheckIfMatch() = true)
             //{
             //    Console.SetCursorPosition(2, 21);
             //    Console.WriteLine("5. New matches");
             //}
-            
-            Console.SetCursorPosition(60, 10);
-            
         }
 
         public static void DisplayDatingProfile(Profile potentialMatch) //done
@@ -169,24 +176,24 @@ namespace DatingApp
             Console.SetCursorPosition(48, 14);
         }
 
-        public static void DisplayMatchMenu(Profile currentProfile, Profile matchProfile)
+        public static void DisplayMatchMenu()
         {
             Console.Clear();
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
 
-            Console.SetCursorPosition(30, 20);
+            Console.SetCursorPosition(2, 10);
             Console.WriteLine("Fantastic! You've got yourself a match!");
-            Console.SetCursorPosition(22, 21);
+            Console.SetCursorPosition(2, 11);
             Console.WriteLine("Would you like to send a message to your match right away? ");
-            Console.SetCursorPosition(34, 23);
+            Console.SetCursorPosition(2, 15);
             Console.WriteLine("1. Send Message");
-            Console.SetCursorPosition(34, 24);
+            Console.SetCursorPosition(2, 16);
             Console.WriteLine("2. Keep matching");
 
 
         }
 
-        public static void DisplayMessagethreads(Profile currentProfile)
+        public static void DisplayMessagethreads(Profile matchprofile, Profile potentialMatch)
         {
             int tæller = 1;
 
@@ -194,17 +201,7 @@ namespace DatingApp
             Console.WriteLine(FiggleFonts.Standard.Render("\t DatingApp!"));
 
             Console.SetCursorPosition(2, 14);
-            Console.WriteLine("All message threads :");
-
-            do
-            {
-
-                Console.SetCursorPosition(2, 16 + tæller);
-                Console.WriteLine("{0}. {1}", tæller, currentProfile.Firstname);
-
-                tæller++;
-
-            } while (tæller < 10);
+            Console.WriteLine("Messages : ");
 
         }
     }

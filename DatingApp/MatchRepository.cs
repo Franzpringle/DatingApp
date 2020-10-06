@@ -36,7 +36,6 @@ namespace DatingApp
             using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
             {
                 conn.Open();
-
                 string command = "DidWeMatch";
 
                 SqlCommand cmd = new SqlCommand(command, conn)
@@ -47,11 +46,9 @@ namespace DatingApp
                 cmd.Parameters.Add(new SqlParameter("@senderId", currentProfile.ProfileId));
                 cmd.Parameters.Add(new SqlParameter("@recieverId", potentialMatch.ProfileId));
 
-
-                var count = cmd.ExecuteScalar();
-                int Matched = Convert.ToInt32(count);
+                int count = (int)cmd.ExecuteScalar();
                 
-                if (Convert.ToInt32(Matched) == 2)
+                if (count == 2)
                 {
                     isMatch = true;
                 }
@@ -77,7 +74,7 @@ namespace DatingApp
                 cmd.Parameters.Add(new SqlParameter("@userid", currentProfile.ProfileId));
 
                 conn.Open();
-                cmd.ExecuteNonQuery();
+                cmd.ExecuteScalar();
                 conn.Close();
             }
 
