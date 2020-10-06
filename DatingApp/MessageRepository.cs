@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+
 
 namespace DatingApp
 {
@@ -10,7 +13,6 @@ namespace DatingApp
         //{
         //    Message.From = User.Username;
         //    Message.To = Profile.ProfileId;
-        //    Message.Subject = Console.ReadLine();
         //    Message.Body = Console.ReadLine();
         //}
 
@@ -23,5 +25,31 @@ namespace DatingApp
         //{
         //    //hent message fra DB
         //}
+
+        public static void AnyNewMessages(User currentUser)
+        {
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString.GetConnectionString()))
+            {
+                string command = "AnyMessages";
+
+                SqlCommand cmd = new SqlCommand(command, conn);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@Username", currentUser.Username));
+
+                conn.Open();
+                var NewMessages = cmd.ExecuteScalar();
+                conn.Close();
+
+                //something like
+                // if(NewMessages > 0)
+                {
+                   //Notification on screen
+                }
+
+            }
+        }
     }
 }

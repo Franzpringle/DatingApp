@@ -15,7 +15,9 @@ namespace DatingApp
 
                 if (menuChoice == "1") DatingPage.Run(currentProfile, currentUser);
                 if (menuChoice == "2") EditProfilePage.Run(currentProfile, currentUser);
-                if (menuChoice == "3") break;
+                if (menuChoice == "3") MessageInboxPage.Run(currentProfile);
+                //if (menuChoice == "4") Matches.Run(currentProfile, currentUser, potentialMatch);
+                if (menuChoice == "5") break;
             }
         }
     }
