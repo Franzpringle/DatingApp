@@ -10,39 +10,68 @@ namespace DatingApp
     class UserRepository
     {
         public static bool userIsNew { get; set; }
+        private static bool usernameIsOk;
+        private static bool emailIsOk;
 
         public static User CreateNewUser()
         {
+
             string pass = string.Empty;
             User u = new User();
 
-            Console.SetCursorPosition(22, 10);
-            u.Username = Console.ReadLine();
             do
             {
-                Console.SetCursorPosition(45, 20);
-                Console.WriteLine("Wrong input.");
-                Console.SetCursorPosition(45, 21);
-                Console.WriteLine("Please try again.");
-                Console.ReadKey();
-                Console.Clear();
-                GUI.DisplayCreateNewUser();
-                CreateNewUser();
+                Console.SetCursorPosition(22, 10);
+                u.Username = Console.ReadLine();
 
-            }while(Regex.IsMatch(u.Username, @"^[a-zA-Z0-9_]+$"));
+                if (Regex.IsMatch(u.Username, "[^A-Za-z0-9]"))
+                {
+                    usernameIsOk = false;
+                    Console.SetCursorPosition(45, 20);
+                    Console.WriteLine("Username must only contain letters and numbers.");
+                    Console.SetCursorPosition(45, 21);
+                    Console.WriteLine("Please try again..");
+                    Console.ReadKey();
+                    Console.SetCursorPosition(22, 10);
+                    Console.Write(new string(' ', u.Username.Length));
+                }
+                else
+                {
+                    usernameIsOk = true;
+                    Console.SetCursorPosition(0, 20);
+                    Console.Write(new string(' ', Console.WindowWidth));
+                    Console.SetCursorPosition(0, 21);
+                    Console.Write(new string(' ', u.Email.Length));
+                }
 
-            Console.SetCursorPosition(22, 11);
-            u.Email = Console.ReadLine();
+            } while (usernameIsOk == false);
+
+
             do
             {
-                Console.SetCursorPosition(45, 20);
-                Console.WriteLine("Wrong input.");
-                Console.SetCursorPosition(45, 21);
-                Console.WriteLine("Please try again.");
-                Console.ReadKey();
-                CreateNewUser();
+                Console.SetCursorPosition(22, 11);
+                u.Email = Console.ReadLine();
 
-            } while (Regex.IsMatch(u.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"));
+                if (Regex.IsMatch(u.Email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
+                {
+                    emailIsOk = false;
+                    Console.SetCursorPosition(45, 20);
+                    Console.WriteLine("Email is invalid.");
+                    Console.SetCursorPosition(45, 21);
+                    Console.WriteLine("Please try again..");
+                    Console.ReadKey();
+                    Console.SetCursorPosition(0, 11);
+                    Console.Write(new string(' ', Console.WindowWidth));
+                }
+                else
+                {
+                    emailIsOk = true;
+                    Console.SetCursorPosition(0, 20);
+                    Console.Write(new string(' ', Console.WindowWidth));
+                    Console.SetCursorPosition(0, 21);
+                    Console.Write(new string(' ', Console.WindowWidth));
+                }
+            } while (emailIsOk == false);
 
             Console.SetCursorPosition(22, 12);
             // replaces any char with a * to avoid PW being visible in plain text in the console.
@@ -111,7 +140,7 @@ namespace DatingApp
             Console.SetCursorPosition(2, 15);
             Console.WriteLine($"user: {u.Username} has been saved..");
             Console.ReadKey();
-            
+
             conn.Close();
 
         }
@@ -167,6 +196,6 @@ namespace DatingApp
             if (userCanBeLoggedIn > 0) return true;
             else return false;
         }
-        
+
     }
 }

@@ -9,13 +9,6 @@ namespace DatingApp
 {
     class MessageRepository
     {
-        public static void CreateNewMessage()
-        {
-            //Message.From = User.Username;
-            //Message.To = Profile.ProfileId;
-            //Message.Body = Console.ReadLine();
-        }
-
         public static void SendMessage(Profile currentprofile, Profile Matchedprofile)
         {
             Message message = new Message();
@@ -33,9 +26,7 @@ namespace DatingApp
                 conn.Open();
                 cmd.ExecuteNonQuery();
                 conn.Close();
-
             }
-
         }
 
         public static Message GetMessage(Profile currentprofile, Profile Matchedprofile)
@@ -89,20 +80,30 @@ namespace DatingApp
 
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add(new SqlParameter("@Username", currentUser.Username));
+                cmd.Parameters.Add(new SqlParameter("@Username", username));
 
                 conn.Open();
+
                 int MessageCounter = (int)cmd.ExecuteScalar();
+
+                int NewMessages = (int)cmd.ExecuteScalar();
+
                 conn.Close();
 
-                //something like
-                // if(NewMessages > 0)
+                if (NewMessages > 0)
                 {
+
                     //Notification on screen
                     NewMessages = true;
                 }
 
                 return NewMessages;
+
+                    return true;
+                }
+
+                return false;
+
             }
         }
     }
