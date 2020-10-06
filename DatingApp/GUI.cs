@@ -92,23 +92,24 @@ namespace DatingApp
             Console.WriteLine("1. Start dating");
             Console.SetCursorPosition(2, 14);
             Console.WriteLine("2. Edit profile");
-            Console.SetCursorPosition(2, 16);
-            Console.WriteLine("3. Log out and return to frontpage");
+            Console.SetCursorPosition(2, 15);
+            Console.WriteLine("3. Messages");
+            Console.SetCursorPosition(2, 18);
+            Console.WriteLine("6. Log out and return to frontpage");
 
-            //if(MessageRepository.AnyNewMessages() = true)
-            //{
-            //    Console.SetCursorPosition(2, 20);
-            //    Console.WriteLine("4. New messages");
-            //}
-
-            //if(MatchRepository.CheckIfMatch() = true)
-            //{
-            //    Console.SetCursorPosition(2, 21);
-            //    Console.WriteLine("5. New matches");
-            //}
-            
             Console.SetCursorPosition(60, 10);
             
+        }
+        public static void DisplayNewMessageOption()
+        {
+            Console.SetCursorPosition(2, 15);
+            Console.WriteLine("4. NEW MESSAGE! - Read");
+        }
+
+        public static void DisplayNewMatchOption()
+        {
+            Console.SetCursorPosition(2, 16);
+            Console.WriteLine("5. NEW MATCH! - Read");
         }
 
         public static void DisplayDatingProfile(Profile potentialMatch) //done
