@@ -1,16 +1,17 @@
-Create procedure [Match]
-@id1,
-@id2
+use DatingApp
+go
+
+
+Create procedure DidWeMatch
+@id1 int,
+@id2 int
 
 as
 
 begin tran
 	begin try
 
-		declare user1
-		set user1 = select id from users where id = @id1
-
-		select * likes 
+		select *  from likes  
 		where (senderId = @id1 and	recieverId = @id2)
 		and (senderId = @id2 and recieverId = @id1)
 		

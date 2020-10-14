@@ -1,7 +1,7 @@
 USE [DatingApp]
 GO
 
-/****** Object:  StoredProcedure [dbo].[NewUser]    Script Date: 02-10-2020 21:52:15 ******/
+/****** Object:  StoredProcedure [dbo].[CheckIfUserExists]    Script Date: 07/10/2020 11.20.58 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9,20 +9,20 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE PROCEDURE [dbo].[CheckIfUserExists]
+ALTER procedure [dbo].[CheckIfUserExists]
+@username nvarchar(30),
+@email nvarchar(50)
 
-@username NVARCHAR(30)
-,@email NVARCHAR(50)
+as
+	select count(*) from users where username = @username or email = @email
+	
 
-AS
 
-BEGIN 
 
-	SELECT u.username, u.email FROM users u
-	WHERE u.username = @username OR u.email = @email
+	
 
-END
 
+	
 GO
 
 
